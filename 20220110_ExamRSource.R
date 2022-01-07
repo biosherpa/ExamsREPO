@@ -21,7 +21,7 @@ multinom<-function(n,prob){
   #rm(list=ls(-1))
 }
 
-n=sample(200:400,1) 
+n=sample(2000:4000,1) 
 
 id<-(1:n)
 model<-rbinom(1,1,.5)
