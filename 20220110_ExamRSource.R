@@ -1,7 +1,3 @@
-#Examen 19092019 sobre controles de drogas en tráfico
-#No hago source porque van a tener todos el mismo.
-
-
 rm(list=ls())
 #set.seed(14949477) #Esta linea se comenta en el raw.
 # if(!require("car")){install.packages('car')} else {require('car')}
