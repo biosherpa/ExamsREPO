@@ -1,9 +1,9 @@
-#Examen 19092019 sobre controles de drogas en tr·fico
+#Examen 19092019 sobre controles de drogas en tr√°fico
 #No hago source porque van a tener todos el mismo.
 
 
 rm(list=ls())
-set.seed(14949477) #Esta linea se comenta en el raw.
+#set.seed(14949477) #Esta linea se comenta en el raw.
 # if(!require("car")){install.packages('car')} else {require('car')}
 # # if(!require("psych")){install.packages('psych')} else{require('psych')}
 # if(!require("epiDisplay")){install.packages('epiDisplay')} else {require('epiDisplay')}
@@ -37,8 +37,8 @@ sex<-rbinom(n,1,.35)
 
 #Para los consumos utilizo tabla 5 del informa de la comunidad de Madrid 
 #http://www.comunidad.madrid/sites/default/files/doc/sanidad/drog/encuesta_domiciliaria_sobre_alcohol_y_drogas_comunidad_de_madrid_2017.pdf
-#Prevalencia de consumo ˙ltimos 12 meses en grupo 15-24 aÒos, pero no estatifican por sexo.
-#Al final lo enfoco como las determinaciones en sujetos en los que se detectÛ consumo en controles de tr·fico.
+#Prevalencia de consumo √∫ltimos 12 meses en grupo 15-24 a√±os, pero no estatifican por sexo.
+#Al final lo enfoco como las determinaciones en sujetos en los que se detect√≥ consumo en controles de tr√°fico.
 # 2000 controles y consumos los que corresponda
 
 smoke<-ifelse(sex==0,rbinom(length(sex==0),1,.35)
@@ -65,7 +65,7 @@ metanfeta<-ifelse(sex==0,rbinom(length(sex==0),1,.05)
 
 
 
-##CreaciÛn de las variable thc en orina y despuÈs mediante modelo lineal.
+##Creaci√≥n de las variable thc en orina y despu√©s mediante modelo lineal.
 # https://www.matillaplant.com/blog-marihuana/thc-que-es/#Cuanto_dura_el_THC_en_la_orina
   
 set.seed(14949477)
@@ -85,14 +85,14 @@ bage<-rnorm(n,0.1,.003)
 thc<-ifelse(cannabis==0,NA,intercerpt+bcannacons*cannacons+bsmoke*smoke+bage*age+bcocaine*cocaine+eps)
 
 
-#Programa experimental reducciÛn del consumo.
+#Programa experimental reducci√≥n del consumo.
 
 group<-ifelse(cannabis==1,rbinom(length(cannabis==1),1,.5),NA)
 
 
-#bajo frecuencia de consumo en grupo intervenciÛn.
-#niveles deberÌan bajar por bajar frecuencia de consumo. Baja frecuencia de consumo in intervenido
-#bajar·n niveles medios del grupo, pero no bajar·n distancias entre frecuencias de consumo.
+#bajo frecuencia de consumo en grupo intervenci√≥n.
+#niveles deber√≠an bajar por bajar frecuencia de consumo. Baja frecuencia de consumo in intervenido
+#bajar√°n niveles medios del grupo, pero no bajar√°n distancias entre frecuencias de consumo.
 
   cannacons12<-0
   cond<-group==0&!is.na(group)
@@ -111,7 +111,7 @@ drugs<-data.frame(id,age,sex,cannabis,cannacons,cannacons12,thc,thc12,group,alco
 
 
 
-##CONVERSI”N EN FACTORES DE ALGUNAS VARIABLES.
+##CONVERSI√ìN EN FACTORES DE ALGUNAS VARIABLES.
 
 drugs$sex<-factor(drugs$sex,labels=c('female','male'))
 drugs$smoke<-factor(drugs$smoke,labels=c('non-smoker','smoker'))
