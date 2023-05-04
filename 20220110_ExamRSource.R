@@ -4,7 +4,7 @@ rm(list=ls())
 # # if(!require("psych")){install.packages('psych')} else{require('psych')}
 # if(!require("epiDisplay")){install.packages('epiDisplay')} else {require('epiDisplay')}
 
-
+# Qué rápido se traslada hacia aquí.
 #2nd Newline checking git 4may23
 
 
