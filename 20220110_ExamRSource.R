@@ -4,7 +4,7 @@ rm(list=ls())
 # # if(!require("psych")){install.packages('psych')} else{require('psych')}
 # if(!require("epiDisplay")){install.packages('epiDisplay')} else {require('epiDisplay')}
 #Newline checking git 4may23
-#2nd Newline checking git 4may23
+
 
 
 multinom<-function(n,prob){
