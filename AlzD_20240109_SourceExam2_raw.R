@@ -1,4 +1,4 @@
-
+rm(list=ls())
 #multinom####
 multinom<-function(n,prob){
   multi<-rmultinom(n,1,prob)
