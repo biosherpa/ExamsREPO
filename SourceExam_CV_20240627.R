@@ -14,7 +14,7 @@ multinom<-function(n,prob){
   return(mat0)
 }
 
-n=sample(1600:1800,size = 1)
+n=sample(600:1800,size = 1)
 histclin<-(10000:(9999+n))
 
 {#Construcción de variables####
