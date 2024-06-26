@@ -13,7 +13,7 @@ multinom<-function(n,prob){
   }
   return(mat0)
 }
-set.seed(123)
+#set.seed(123)
 
 n=sample(1600:1800,size = 1)
 histclin<-(10000:(9999+n))
