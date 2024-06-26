@@ -13,8 +13,7 @@ multinom<-function(n,prob){
   }
   return(mat0)
 }
-
-  set.seed(123)
+set.seed(123)
 
 n=sample(1600:1800,size = 1)
 histclin<-(10000:(9999+n))
@@ -51,7 +50,7 @@ histclin<-(10000:(9999+n))
     #Comprobación   
     # cor(gluc_t0, hba1c_pre)
     # data.frame(gluc_t0, hba1c_pre,ad_oral) %>%
-    #   mutate(diab_hba = hba1c_pre>6.5) %>% 
+    #   mutate(diab_hba = hba1c_pre>6.5) %>%
     #   ggplot2::ggplot(aes(gluc_t0, hba1c_pre, color = ad_oral,shape = diab_hba)) +
     #   geom_point()
     
@@ -67,11 +66,11 @@ histclin<-(10000:(9999+n))
     hba1c_pos <- 4 + beta_gluc * gluc_t1 / 10 + beta_ao * as.numeric(ad_oral)-1
     #Corrijo valores no fisiológicos.
     # hba1c_pos <- ifelse(hba1c_pos<5,sample(hba1c_pos[hba1c_pos>5 & hba1c_pos<10],size = length(hba1c_pos[hba1c_pos>5 & hba1c_pos<7]),replace = T),hba1c_pos)
-    # data.frame(gluc_t1, hba1c_pos) %>%
-    #   mutate(diab_hba = hba1c_pos>6.5) %>%
-    #   ggplot2::ggplot(aes(gluc_t1, hba1c_pos, color = ad_oral,shape = diab_hba)) +
-    #   geom_point()
-    # cor(gluc_t1, hba1c_pos)
+    data.frame(gluc_t1, hba1c_pos) %>%
+      mutate(diab_hba = hba1c_pos>6.5) %>%
+      ggplot2::ggplot(aes(gluc_t1, hba1c_pos, color = ad_oral,shape = diab_hba)) +
+      geom_point()
+    cor(gluc_t1, hba1c_pos)
 
     
   }
@@ -86,7 +85,7 @@ histclin<-(10000:(9999+n))
   
   datos$logb0<-rnorm(length(datos$histclin),0,.1)
   datos$logbad_oral<-rnorm(length(datos$histclin),-0.15,.025)
-  datos$logbdiab<-rnorm(length(datos$histclin),0.05,.06)
+  datos$logbdiab<-rnorm(length(datos$histclin),0.25,.06)
   sigma <- 0.2
   eps <- rnorm(length(datos$histclin),0,sigma)
   
@@ -100,18 +99,18 @@ histclin<-(10000:(9999+n))
   #Corte del (1-cuantil)% superior de riesgo para establecer AE.
   datos$event_cv<-ifelse(datos$event_cv>quantile(datos$event_cv,c(.75)),1,0)
   
-  prop.table(table(datos$ad_oral,datos$event_cv),1)
-  fit.eve <- glm(data=datos,
-                 event_cv~ad_oral,
-                 family = 'binomial'
-  )
-  library(modelsummary)
-  library(kableExtra)
-  library(gt)
-  modelsummary::modelsummary (fit.eve,exponentiate = T)
+  # prop.table(table(datos$ad_oral,datos$event_cv),1)
+  # fit.eve <- glm(data=datos,
+  #                event_cv~ad_oral,
+  #                family = 'binomial'
+  # )
+  # library(modelsummary)
+  # library(kableExtra)
+  # library(gt)
+  # modelsummary::modelsummary (fit.eve,exponentiate = T)
+  # 
   }
     
-  write.csv(datos,'datos.csv')
     
    
  
@@ -138,4 +137,4 @@ datos[,grepl('^log*',x = colnames(datos))] <-NULL
   )]
 rm(list=setdiff(ls(), "datos"))
 print(getwd())
-write.csv(datos,'~/diab.csv')
+write.csv(datos,'~/datos.csv')
