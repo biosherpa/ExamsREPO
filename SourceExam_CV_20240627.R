@@ -66,11 +66,11 @@ histclin<-(10000:(9999+n))
     hba1c_pos <- 4 + beta_gluc * gluc_t1 / 10 + beta_ao * as.numeric(ad_oral)-1
     #Corrijo valores no fisiológicos.
     # hba1c_pos <- ifelse(hba1c_pos<5,sample(hba1c_pos[hba1c_pos>5 & hba1c_pos<10],size = length(hba1c_pos[hba1c_pos>5 & hba1c_pos<7]),replace = T),hba1c_pos)
-    data.frame(gluc_t1, hba1c_pos) %>%
-      mutate(diab_hba = hba1c_pos>6.5) %>%
-      ggplot2::ggplot(aes(gluc_t1, hba1c_pos, color = ad_oral,shape = diab_hba)) +
-      geom_point()
-    cor(gluc_t1, hba1c_pos)
+    #data.frame(gluc_t1, hba1c_pos) %>%
+     # mutate(diab_hba = hba1c_pos>6.5) %>%
+     # ggplot2::ggplot(aes(gluc_t1, hba1c_pos, color = ad_oral,shape = diab_hba)) +
+     # geom_point()
+    #cor(gluc_t1, hba1c_pos)
 
     
   }
