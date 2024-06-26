@@ -14,13 +14,14 @@ multinom<-function(n,prob){
   return(mat0)
 }
 
+  set.seed(123)
+
 n=sample(1600:1800,size = 1)
 histclin<-(10000:(9999+n))
 
 {#Construcción de variables####
   # Generando variables fisiológicas
   # Paso 1: Generar Datos Ficticios
-  set.seed(123)
   edad <- round(runif(n, 18, 90))  # Edad entre 18 y 90 años
   peso <- round(rnorm(n, 70, 15), 1)  # Peso en kg con media 70 y desviación estándar 15
   altura <- round(rnorm(n, 1.7, 0.1), 2)  # Altura en metros con media 1.7 y desviación estándar 0.1
@@ -83,7 +84,6 @@ histclin<-(10000:(9999+n))
   
   {#Modelo logístico para creación de complicaciones.
   
-  set.seed(1234)
   datos$logb0<-rnorm(length(datos$histclin),0,.1)
   datos$logbad_oral<-rnorm(length(datos$histclin),-0.15,.025)
   datos$logbdiab<-rnorm(length(datos$histclin),0.05,.06)
