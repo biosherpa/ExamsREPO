@@ -1,4 +1,4 @@
-rm(list=ls())
+{rm(list=ls())
 #multinom####
 multinom<-function(n,prob){
   multi<-rmultinom(n,1,prob)
@@ -13,7 +13,7 @@ multinom<-function(n,prob){
   }
   return(mat0)
 }
-#set.seed(1234)
+# set.seed(1234)
 
 n=sample(1600:1800,size = 1)
 histclin<-(10000:(9999+n))
@@ -295,4 +295,5 @@ print(getwd())
 write.csv(datos,'~/datos.csv') # Lo coloco en HOME
 datos <- read.csv('~/datos.csv')
 
+}
 }
