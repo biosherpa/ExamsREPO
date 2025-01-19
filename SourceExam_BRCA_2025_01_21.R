@@ -13,7 +13,7 @@ multinom<-function(n,prob){
   }
   return(mat0)
 }
-set.seed(1234)
+#set.seed(1234)
 
 n=sample(1600:1800,size = 1)
 histclin<-(10000:(9999+n))
@@ -286,8 +286,8 @@ histclin<-(10000:(9999+n))
 # brca[,grepl('^log*',x = colnames(brca))] <-NULL
 #   brca[,grepl('^lin*',x = colnames(brca))] <-NULL
   
-
-datos <- brca[, c("histclin", "age", "hb", "smoke", "stage", "Tn", "N", "M", "er", "ca15_bas", "riskdeath", "death", "ca15_6m", "ca15_dif")]
+{
+datos <- brca[, c("histclin", "age", "hb", "smoke", "stage", "Tn", "N", "M", "er", "ca15_bas", "riskdeath", "death", "ca15_6m")]
 
 rm(list=setdiff(ls(), "datos"))
 print(getwd())
@@ -295,5 +295,4 @@ print(getwd())
 write.csv(datos,'~/datos.csv') # Lo coloco en HOME
 datos <- read.csv('~/datos.csv')
 
-
-
+}
