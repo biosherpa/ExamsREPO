@@ -292,7 +292,7 @@ datos <- brca[, c("histclin", "age", "hb", "smoke", "stage", "Tn", "N", "M", "er
 rm(list=setdiff(ls(), "datos"))
 print(getwd())
 # write.csv(brca,paste0(getwd(),'/brca.csv')) #No me arriesgo.
-write.csv(datos,'~/datos.csv') # Lo coloco en HOME
+write.csv(datos,'~/datos.csv',row.names = F) # Lo coloco en HOME
 datos <- read.csv('~/datos.csv')
 
 }
