@@ -287,7 +287,7 @@ histclin<-(10000:(9999+n))
 #   brca[,grepl('^lin*',x = colnames(brca))] <-NULL
   
 {
-datos <- brca[, c("histclin", "age", "hb", "smoke", "stage", "Tn", "N", "M", "er", "ca15_bas", "riskdeath", "death", "ca15_6m")]
+datos <- brca[, c("histclin", "age", "hb", "smoke", "stage", "Tn", "N", "M", "er", "ca15_bas", "death", "ca15_6m")]
 
 rm(list=setdiff(ls(), "datos"))
 print(getwd())
