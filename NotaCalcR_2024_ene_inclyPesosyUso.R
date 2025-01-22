@@ -60,7 +60,7 @@ pond.cor<-function(vecpond,vecus,veccal,namecrit){
 
 notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   library(xlsx)
-  npreg=5
+  npreg=6
   pesopreg <- c(20,20,10,25,25)
   
   matvecpond<-matrix(rep(pesopreg,npreg),nrow=npreg,byrow = T)
@@ -109,7 +109,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
     
   }
   
-  dimnames(matvecus) <- list(paste0('Preg',1:npreg),
+  dimnames(matvecus) <- list(paste0('Preg',1:6),
                              namecrit)
   
 
