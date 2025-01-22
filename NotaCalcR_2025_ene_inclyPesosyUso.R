@@ -195,7 +195,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   mat.res.tres[npreg+1,6]<-mean(mat.res.tres[1:5,6]) #A falta de algo mejor corrijo manualmente.
   
   # apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,],2,mean,na.rm=T)
-  sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+1,6],na.rm=T)
+  sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+2,6],na.rm=T)
   
   #2025 no hay pregunta extra.
   
