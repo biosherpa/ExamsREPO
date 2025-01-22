@@ -10,7 +10,21 @@
 #Además genera xlsx en el que va incluyendo el nombre de cada alumno con su nota final. 
 # (cuidado no controla duplicados, solo añade lineas)
 
-#Ene2021_añado funcion y matrices aquí para pasar a Adri.
+#Ene2021_añado funciones y matrices aquí para pasar a Adri.
+
+#Ene2025 añado enlaces a github para poder compartir uso con Jesús.
+
+
+
+# # Vectores de prueba longitud 5
+cal1<-c(0,0,0,10,10)
+cal2<-c(0,0,0,10,10)
+cal3<-c(10,10,10,10,10)
+cal4<-c(10,10,10,10,10)
+cal5<-c(0,0,0,10,10)
+# # cal6<-c(10,10,10,8)
+# # cal7<-c(5,5,5,5)
+tipo <-1
 ##################################################### ###
 pond.cor<-function(vecpond,vecus,veccal,namecrit){
   # vecpond<-c(15,15,25,35) #pesos tal cual.
@@ -78,7 +92,8 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   # otros. Así que he de cargar un vector de uso diferente en función del grupo de prácticas.
   
    # tipo <- 3
-  matvecus<-if(tipo==3){ matrix(c(NA,NA,NA,1,NA,
+  matvecus<-if(tipo==3){ matrix(c(
+                      NA,NA,NA,1,NA,
                      1,1,1,1,1,
                      NA,NA,NA,1,1,
                      1,1,1,1,1,
@@ -220,17 +235,6 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
 
 }
 
-
-
-# # Vectores de prueba longitud 5
-# cal1<-c(0,0,0,10,10)
-# cal2<-c(0,0,0,10,10)
-# cal3<-c(10,10,10,10,10)
-# cal4<-c(10,10,10,10,10)
-# cal5<-c(0,0,0,10,10)
-# # cal6<-c(10,10,10,8)
-# # cal7<-c(5,5,5,5)
-# tipo <-1
 
  notafin.R()
  # rm(list=setdiff(ls(),c("notafin.R","pond.cor",'datos')))
