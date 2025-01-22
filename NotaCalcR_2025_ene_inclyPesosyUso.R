@@ -17,14 +17,14 @@
 
 
 # # Vectores de prueba longitud 5
-#cal1<-c(0,0,0,10,10)
-#cal2<-c(0,0,0,10,10)
-#cal3<-c(10,10,10,10,10)
-#cal4<-c(10,10,10,10,10)
-#cal5<-c(0,0,0,10,10)
+cal1<-c(0,0,0,10,10)
+cal2<-c(0,0,0,10,10)
+cal3<-c(10,10,10,10,10)
+cal4<-c(10,10,10,10,10)
+cal5<-c(0,0,0,10,10)
 # # cal6<-c(10,10,10,8)
 # # cal7<-c(5,5,5,5)
-#tipo <-1
+tipo <-1
 ##################################################### ###
 pond.cor<-function(vecpond,vecus,veccal,namecrit){
   # vecpond<-c(15,15,25,35) #pesos tal cual.
@@ -192,17 +192,20 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                   )
   mat.res.tres <- round(cbind(mat.res.tres,`TotPreg_10`=apply(mat.res.tres,1,sum,na.rm=T)),2)
   # mat.res.tres[npreg,6]<-mat.res.tres[npreg,6]/5 #A falta de algo mejor corrijo manualmente. No funciona porque los pesos son diferentes en cada conjunto
-  mat.res.tres[npreg,6]<-mean(mat.res.tres[1:5,6]) #A falta de algo mejor corrijo manualmente.
+  mat.res.tres[npreg+1,6]<-mean(mat.res.tres[1:5,6]) #A falta de algo mejor corrijo manualmente.
   
   # apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,],2,mean,na.rm=T)
-  sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+1,6],na.rm=T)
+  # sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+1,6],na.rm=T) 
+  
+  #2025 no hay pregunta extra.
+  
   #Divido la suma total de meanpregob10 por 5 preguntas y divido la Pextra (sober 10) entre 40 para que sume 0.25
-  mat.res.tres<-rbind(mat.res.tres
-                      ,NotaFinalR=if(sumaMeanExtra>=10) {c(rep(0,5),10)} 
-                      else{
-                        c(rep(0,5),sumaMeanExtra)
-                        }
-                      )#Si no divido por 2, sale el
+  # mat.res.tres<-rbind(mat.res.tres
+  #                     ,NotaFinalR=if(sumaMeanExtra>=10) {c(rep(0,5),10)} 
+  #                     else{
+  #                       c(rep(0,5),sumaMeanExtra)
+  #                       }
+  #                     )#Si no divido por 2, sale el
     #las saco después de generarls porque de hacerlo directamente luego hace cosas extrañas.
   
   matvecus.print <<-matvecus
