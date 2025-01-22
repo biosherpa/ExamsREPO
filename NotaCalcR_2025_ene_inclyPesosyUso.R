@@ -17,14 +17,14 @@
 
 
 # # Vectores de prueba longitud 5
-# cal1<-c(0,0,0,10,10)
-# cal2<-c(0,0,0,10,10)
-# cal3<-c(10,10,10,10,10)
-# cal4<-c(10,10,10,10,10)
-# cal5<-c(0,0,0,10,10)
-# # # cal6<-c(10,10,10,8)
+cal1<-c(0,0,0,10,10)
+cal2<-c(0,0,0,10,10)
+cal3<-c(10,10,10,10,10)
+cal4<-c(10,10,10,10,10)
+cal5<-c(10,10,10,10,10)
+cal6<-c(0,0,0,10,0) #Si compila correctamente.
 # # # cal7<-c(5,5,5,5)
-# tipo <-1
+tipo <-1
 ##################################################### ###
 pond.cor<-function(vecpond,vecus,veccal,namecrit){
   # vecpond<-c(15,15,25,35) #pesos tal cual.
@@ -74,7 +74,7 @@ pond.cor<-function(vecpond,vecus,veccal,namecrit){
 
 notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   library(xlsx)
-  npreg=5
+  npreg=6
   pesopreg <- c(20,20,10,25,25)
   
   matvecpond<-matrix(rep(pesopreg,npreg),nrow=npreg,byrow = T)
@@ -97,8 +97,8 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                      1,1,1,1,1,
                      NA,NA,NA,1,1,
                      1,1,1,1,1,
-                     1,1,1,1,1#,
-                     # NA,NA,NA,NA,1#, compilo rmd preg extra.
+                     1,1,1,1,1,
+                     NA,NA,NA,NA,1#, compilo rmd preg extra.
                      # 0,0,0,1
 ),nrow=npreg,byrow = T)
 
@@ -107,8 +107,8 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                                1,1,1,1,1,
                                1,1,1,1,1,#Este es diferente respecto al grupo 3
                                1,1,1,1,1,
-                               1,1,1,1,1#,
-                               # NA,NA,NA,NA,1#, compilo rmd preg extra.
+                               1,1,1,1,1,
+                               NA,NA,NA,NA,1#, compilo rmd preg extra.
                                # 0,0,0,1
   ),nrow=npreg,byrow = T)
   } else if (tipo==1) {
@@ -116,8 +116,8 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
              NA,NA,NA,1,1,
              1,1,1,1,1,#Este es diferente respecto al grupo 3. El G2 y el G1 tienen la misma matriz de vecus.
              1,1,1,1,1,
-             1,1,1,1,1#,
-             # NA,NA,NA,NA,1#, compilo rmd preg extra.
+             1,1,1,1,1,
+             NA,NA,NA,1,NA#, compilo rmd preg extra.
              # 0,0,0,1
     ),nrow=npreg,byrow = T)
     
@@ -179,12 +179,12 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   mat.res.tres<-round(rbind(mat.res.dos[1:(npreg),],
                             #2021_07_03 indexo mat.res.dos para evitar que incluya la P7 en promedio
                             #2024_01_02 cambio p7 a pextra paraflexibilizar archivo: Asumo que la extra siempre es la última.
-                            MeanPregOb_10=apply(mat.res.dos[1:dim(mat.res.dos)[1],]/mat.pond,2,mean,na.rm=T)#,
+                            MeanPregOb_10=apply(mat.res.dos[1:dim(mat.res.dos)[1],]/mat.pond,2,mean,na.rm=T),
                             
                             #2025 solo 5 preguntas sin extra por lo que comento y cambio dimensiones de matrices
                             # uso npreg en vez de npreg-1
                             # MeanPregOb_10=apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,]/mat.pond[-6,],2,mean,na.rm=T),
-                            # PExtra=mat.res.dos[npreg,]/40
+                            PExtra=mat.res.dos[npreg,]/40
                             # ,PExtra=sum(mat.res.2[npreg,]/10)
                             
                         )
@@ -195,17 +195,17 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   mat.res.tres[npreg+1,6]<-mean(mat.res.tres[1:5,6]) #A falta de algo mejor corrijo manualmente.
   
   # apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,],2,mean,na.rm=T)
-  # sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+1,6],na.rm=T) 
+  sumaMeanExtra=sum(mean(mat.res.tres[1:5,6]),mat.res.tres[npreg+1,6],na.rm=T)
   
   #2025 no hay pregunta extra.
   
   #Divido la suma total de meanpregob10 por 5 preguntas y divido la Pextra (sober 10) entre 40 para que sume 0.25
-  # mat.res.tres<-rbind(mat.res.tres
-  #                     ,NotaFinalR=if(sumaMeanExtra>=10) {c(rep(0,5),10)} 
-  #                     else{
-  #                       c(rep(0,5),sumaMeanExtra)
-  #                       }
-  #                     )#Si no divido por 2, sale el
+  mat.res.tres<-rbind(mat.res.tres
+                      ,NotaFinalR=if(sumaMeanExtra>=10) {c(rep(0,5),10)}
+                      else{
+                        c(rep(0,5),sumaMeanExtra)
+                        }
+                      )#Si no divido por 2, sale el
     #las saco después de generarls porque de hacerlo directamente luego hace cosas extrañas.
   
   matvecus.print <<-matvecus
