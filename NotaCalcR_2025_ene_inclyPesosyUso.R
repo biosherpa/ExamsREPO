@@ -14,15 +14,15 @@
 
 #Ene2025 añado enlaces a github para poder compartir uso con Jesús.
 
-
-
-# # Vectores de prueba longitud 5
+# 
+# 
+# # # Vectores de prueba longitud 5
 # cal1<-c(0,0,0,10,10)
 # cal2<-c(0,0,0,10,10)
-# cal3<-c(10,10,10,10,10)
-# cal4<-c(10,10,10,10,10)
-# cal5<-c(10,10,10,10,10)
-# cal6<-c(0,0,0,10,0) #Si compila correctamente.
+# cal3<-c(10,8,10,10,10)
+# cal4<-c(5,9,10,10,10)
+# cal5<-c(10,10,10,8,10)
+# cal6<-c(0,0,0,5,0) #Si compila correctamente.
 # # # # cal7<-c(5,5,5,5)
 # tipo <-1
 ### paquetes necesarios.
@@ -242,11 +242,11 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                         ,dim(mat.res.tres)[2]])
   notatot.print <<- notatot
 
-  #namealumno<-substr(paste0(basename(getwd())),start=0,stop=regexpr('_',paste0(basename(getwd())))[1]-1)
-  #filename=paste0('./',namealumno,'_',notatot,'.xlsx')
-  #openxlsx::write.xlsx(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
-  #openxlsx::write.xlsx(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
-  #openxlsx::write.xlsx(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
+  namealumno<-substr(paste0(basename(getwd())),start=0,stop=regexpr('_',paste0(basename(getwd())))[1]-1)
+  filename=paste0('./',namealumno,'_',notatot,'.xlsx')
+  openxlsx::write.xlsx(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
+  openxlsx::write.xlsx(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
+  openxlsx::write.xlsx(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
   
 
 }
