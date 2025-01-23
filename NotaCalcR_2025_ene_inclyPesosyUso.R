@@ -17,14 +17,27 @@
 
 
 # # Vectores de prueba longitud 5
-# cal1<-c(0,0,0,10,10)
-# cal2<-c(0,0,0,10,10)
-# cal3<-c(10,10,10,10,10)
-# cal4<-c(10,10,10,10,10)
-# cal5<-c(10,10,10,10,10)
-# cal6<-c(0,0,0,10,0) #Si compila correctamente.
-# # # # cal7<-c(5,5,5,5)
-# tipo <-1
+cal1<-c(0,0,0,10,10)
+cal2<-c(0,0,0,10,10)
+cal3<-c(10,10,10,10,10)
+cal4<-c(10,10,10,10,10)
+cal5<-c(10,10,10,10,10)
+cal6<-c(0,0,0,10,0) #Si compila correctamente.
+# # # cal7<-c(5,5,5,5)
+tipo <-1
+### paquetes necesarios.
+
+pck.list<-c('gt',"tidyverse",
+            'openxlsx',"gt"
+)
+
+notinst.packages<-pck.list[!pck.list %in% installed.packages()]
+#Lo siguiente tomado de mis retales de código.
+lapply(notinst.packages,install.packages,dependencies=TRUE)
+# unloaded.packages<-pck.list[!(paste('package:',pck.list, sep='') %in% search())]
+#Más fácil esta.
+lapply(pck.list[!paste0('package:',pck.list)%in%search()],require,character.only=TRUE)
+
 ##################################################### ###
 pond.cor<-function(vecpond,vecus,veccal,namecrit){
   # vecpond<-c(15,15,25,35) #pesos tal cual.
@@ -231,9 +244,9 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
 
   namealumno<-substr(paste0(basename(getwd())),start=0,stop=regexpr('_',paste0(basename(getwd())))[1]-1)
   filename=paste0('./',namealumno,'_',notatot,'.xlsx')
-  write.xlsx2(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
-  write.xlsx2(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
-  write.xlsx2(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
+  openxlsx::write.xlsx(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
+  openxlsx::write.xlsx(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
+  openxlsx::write.xlsx(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
   
 
 }
