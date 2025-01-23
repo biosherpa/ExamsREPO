@@ -242,11 +242,11 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                         ,dim(mat.res.tres)[2]])
   notatot.print <<- notatot
 
-  namealumno<-substr(paste0(basename(getwd())),start=0,stop=regexpr('_',paste0(basename(getwd())))[1]-1)
-  filename=paste0('./',namealumno,'_',notatot,'.xlsx')
-  openxlsx::write.xlsx(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
-  openxlsx::write.xlsx(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
-  openxlsx::write.xlsx(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
+  #namealumno<-substr(paste0(basename(getwd())),start=0,stop=regexpr('_',paste0(basename(getwd())))[1]-1)
+  #filename=paste0('./',namealumno,'_',notatot,'.xlsx')
+  #openxlsx::write.xlsx(mat.res.uno,file=filename,sheetName=paste('NotasCrudas',1))
+  #openxlsx::write.xlsx(mat.res.tres,file=filename,sheetName=paste('NotasPonderadas',2),append=T)
+  #openxlsx::write.xlsx(mat.pond,file=filename,sheetName='MatrixPonderación',append=T)
   
 
 }
