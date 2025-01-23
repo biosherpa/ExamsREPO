@@ -17,14 +17,14 @@
 
 
 # # Vectores de prueba longitud 5
-cal1<-c(0,0,0,10,10)
-cal2<-c(0,0,0,10,10)
-cal3<-c(10,10,10,10,10)
-cal4<-c(10,10,10,10,10)
-cal5<-c(10,10,10,10,10)
-cal6<-c(0,0,0,10,0) #Si compila correctamente.
-# # # cal7<-c(5,5,5,5)
-tipo <-1
+# cal1<-c(0,0,0,10,10)
+# cal2<-c(0,0,0,10,10)
+# cal3<-c(10,10,10,10,10)
+# cal4<-c(10,10,10,10,10)
+# cal5<-c(10,10,10,10,10)
+# cal6<-c(0,0,0,10,0) #Si compila correctamente.
+# # # # cal7<-c(5,5,5,5)
+# tipo <-1
 ### paquetes necesarios.
 
 pck.list<-c('gt',"tidyverse",
@@ -86,7 +86,7 @@ pond.cor<-function(vecpond,vecus,veccal,namecrit){
 #debería funcionar.
 
 notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
-  library(xlsx)
+  # library(xlsx)
   npreg=6
   pesopreg <- c(20,20,10,25,25)
   
