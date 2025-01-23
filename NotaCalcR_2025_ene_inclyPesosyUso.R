@@ -111,7 +111,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                      NA,NA,NA,1,1,
                      1,1,1,1,1,
                      1,1,1,1,1,
-                     NA,NA,NA,NA,1#, compilo rmd preg extra.
+                     NA,NA,NA,1,NA#, compilo rmd preg extra.
                      # 0,0,0,1
 ),nrow=npreg,byrow = T)
 
@@ -121,7 +121,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                                1,1,1,1,1,#Este es diferente respecto al grupo 3
                                1,1,1,1,1,
                                1,1,1,1,1,
-                               NA,NA,NA,NA,1#, compilo rmd preg extra.
+                               NA,NA,NA,1,NA#, compilo rmd preg extra.
                                # 0,0,0,1
   ),nrow=npreg,byrow = T)
   } else if (tipo==1) {
