@@ -106,32 +106,34 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   
    # tipo <- 3
   matvecus<-if(tipo==3){ matrix(c(
-                      NA,NA,NA,1,NA,
-                     1,1,1,1,1,
-                     NA,NA,NA,1,1,
-                     1,1,1,1,1,
-                     1,1,1,1,1,
-                     NA,NA,NA,1,NA#, compilo rmd preg extra.
-                     # 0,0,0,1
+    NA,NA,NA,1,1,
+    NA,NA,NA,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1,
+    NA,NA,NA,1,NA#, compilo rmd preg extra.
+    # 0,0,0,1
 ),nrow=npreg,byrow = T)
 
 
-  } else if (tipo==2) { matrix(c(NA,NA,NA,1,NA,
-                               1,1,1,1,1,
-                               1,1,1,1,1,#Este es diferente respecto al grupo 3
-                               1,1,1,1,1,
-                               1,1,1,1,1,
-                               NA,NA,NA,1,NA#, compilo rmd preg extra.
-                               # 0,0,0,1
+  } else if (tipo==2) { matrix(c(
+    NA,NA,NA,1,1,
+    NA,NA,NA,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1,
+    1,1,1,1,1,
+    NA,NA,NA,1,NA#, compilo rmd preg extra.
+    # 0,0,0,1
   ),nrow=npreg,byrow = T)
   } else if (tipo==1) {
-    matrix(c(NA,NA,NA,1,1,#Aquí valoro interpretación porque la hay
-             NA,NA,NA,1,1,
-             NA,NA,NA,1,1,#
-             1,1,1,1,1,
-             1,1,1,1,1,
-             NA,NA,NA,1,NA#, compilo rmd preg extra.
-             # 0,0,0,1
+    matrix(c(
+            NA,NA,NA,1,1,#Aquí valoro interpretación porque la hay
+            NA,NA,NA,1,1,
+            NA,NA,NA,1,1,#
+            1,1,1,1,1,
+            1,1,1,1,1,
+            NA,NA,NA,1,NA#, compilo rmd preg extra.
+            # 0,0,0,1
     ),nrow=npreg,byrow = T)
     
     
