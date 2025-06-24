@@ -282,18 +282,19 @@ generate_ecv <- function(data) {
 # Función principal que genera todo y devuelve dataframe listo
   # set.seed(123)
   n <- sample(x = 1000:1500,1)
-  hist_clin <- paste(sample(3000:8000,n),1:n,sep = "_")
 
 
 generate_sleep_dataset <- function(n) {
   data <- generate_clinical_data(n)
+  data$hist_clin <- paste(sample(3000:8000,n),1:n,sep = "_")
   data$sleepdur_3yr <- round(generate_sleepdur_3yr(data),2)
   data$weight_3yr <- round(generate_weight_3yr(data),2)
   data$ecv <- generate_ecv(data)
-  data
+  return(data)
 }
 
 datos <- generate_sleep_dataset(n) 
+datos <- datos[,c('hist_clin','age','height','weight','bmi','smoke','sleepdur_base', 'group_ct','sleepdur_3yr','weight_3yr','ecv')]
 
 colnames(datos)
 
@@ -304,6 +305,6 @@ write.csv(
           "~/sleep.csv")
 
 
-rm(list=c(ls(pattern="generate"),'multinom_sample','n','hist_clin'))
+rm(list=c(ls(pattern="generate"),'multinom_sample','n'))
 
 
