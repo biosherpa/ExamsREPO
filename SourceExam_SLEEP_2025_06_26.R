@@ -219,6 +219,7 @@ generate_ecv <- function(data) {
 
 
 
+
 ######### COMPROBACIONES ####
 # datos$ecv <- generate_ecv (datos)
 
@@ -281,6 +282,7 @@ generate_ecv <- function(data) {
 # Función principal que genera todo y devuelve dataframe listo
   # set.seed(123)
   n <- sample(x = 1000:1500,1)
+  hist_clin <- paste(sample(3000:8000,n),1:n,sep = "_")
 
 
 generate_sleep_dataset <- function(n) {
@@ -291,10 +293,14 @@ generate_sleep_dataset <- function(n) {
   data
 }
 
-datos <- generate_sleep_dataset(n)
+datos <- generate_sleep_dataset(n) 
+
+colnames(datos)
+
 
 write.csv(
   generate_sleep_dataset(n),
+  
           "~/sleep.csv")
 
 
