@@ -304,6 +304,6 @@ write.csv(
           "~/sleep.csv")
 
 
-rm(list=c(ls(pattern="generate"),'multinom_sample','n','histclin'))
+rm(list=c(ls(pattern="generate"),'multinom_sample','n','hist_clin'))
 
 
