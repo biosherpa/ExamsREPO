@@ -10,7 +10,7 @@ generate_clinical_data <- function(n) {
   height <- rnorm(n,178,5)
   bmi <- rnorm(n,30,1)
   weight <- bmi*(height/100)^2
-  smoke <- factor(multinom_sample(n,c(.6,.1,.3)), labels = c("NoSomoking","Exfumador", "Fumador actual"))
+  smoke <- factor(multinom_sample(n,c(.6,.1,.3)), labels = c("Nunca fumador","Exfumador", "Fumador actual"))
   sleepdur_base <- rnorm(n,6,.25)
   group_ct <- factor(rbinom(n,1,.5))
 
@@ -304,6 +304,6 @@ write.csv(
           "~/sleep.csv")
 
 
-rm(list=c(ls(pattern="generate"),'multinom_sample','n'))
+rm(list=c(ls(pattern="generate"),'multinom_sample','n','histclin'))
 
 
