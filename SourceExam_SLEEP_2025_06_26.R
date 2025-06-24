@@ -109,57 +109,7 @@ generate_weight_3yr <- function(data) {
 # Función para generar la variable EVENTO CV (logística)
 # BMI e incremento de peso (más alto en 3yr, por tanto positivo) aumentan el riesgo,
 # sleepdur_dif positiva, sueño más largo en 3yr, disminuye riesgo ecv
-generate_ecv <- function(data) {
-  
-  var1 <- data$bmi
-  var2 <- data$sleepdur_3yr - data$sleepdur_base
-  var3 <- data$weight_3yr - data$weight
-  var4 <- data$group_ct
-  tabaco_dummies <- model.matrix(~ smoke, data = data)[, -1]
-  
-  n <- nrow(data)
-  
-  ORs <- c(1, #b0
-           1.2, #bvar1
-           0.2, #bvar2
-           1.75, #bvar3
-           0.75, #bvar4
-           1.1,
-           1.4
-           )  # Intercepto = 1 para log(1)=0
-  log_ORs <- log(ORs)
-  SE_ORs <- rep(0.1, length(ORs))
-  
-  logb <- sapply(1:length(log_ORs), function(i) rnorm(n, mean = log_ORs[i], sd = SE_ORs[i]))
-  
-  scaled_var1 <- scale(var1)
-  scaled_var2 <- scale(var2)
-  scaled_var3 <- scale(var3)
-  
-  logit <- logb[,1] + 
-    logb[,2] * scaled_var1 + 
-    logb[,3] * scaled_var2 + 
-    logb[,4] * scaled_var3 +
-    logb[,5] * as.numeric(var4)+
-    logb[,6] * tabaco_dummies[,1] +   # coef * dummy ex fumador
-    logb[,7] * tabaco_dummies[,2]     # coef * dummy actual fumador
-  
-  eps <- rnorm(n, 0, 0.05)
-  logit_final <- logit + eps
-  
-  risk_cv <- exp(logit_final) / (1 + exp(logit_final))
-  
-  # risk_cv1 <- factor(rbinom(n, 1, prob = risk_cv), labels = c("No_CVE", "Yes_CVE"))
-  risk_cv <- factor(risk_cv > sample(x = c(.85,.88,.9),
-                                     size =1,
-                                     replace =T), 
-                    labels = c("No_CVE", "Yes_CVE")
-                    )
-  
-  # return(risk_cv1)
-  return(risk_cv)
-  
-}
+
 
 generate_ecv <- function(data) {
   var1 <- data$bmi
