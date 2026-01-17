@@ -133,6 +133,16 @@ generate_outcomes <- function(data) {
 datos_temp <- generate_clinical_data(n_size)
 datos <- generate_outcomes(datos_temp)
 
+# --- REVERSIÓN DE FACTORES ---
+
+# Convertimos treat a numérico (0, 1, 2) para que el alumno tenga que factorizarlo
+datos$treat <- as.numeric(as.factor(datos$treat)) - 1
+
+# Aseguramos que el resto sean caracteres o números, no factores
+datos$smoke <- as.character(datos$smoke)
+datos$sex   <- as.character(datos$sex)
+datos$ev_cv <- as.numeric(as.character(datos$ev_cv))
+
 # Guardado CSV
 write.csv(datos, "~/step_ct.csv", row.names = FALSE)
 
