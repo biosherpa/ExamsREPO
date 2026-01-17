@@ -141,7 +141,7 @@ datos$treat <- as.numeric(as.factor(datos$treat)) - 1
 # Aseguramos que el resto sean caracteres o números, no factores
 datos$smoke <- as.character(datos$smoke)
 datos$sex   <- as.character(datos$sex)
-datos$ev_cv <- as.numeric(as.character(datos$ev_cv))
+datos$ev_cv <- as.numeric(datos$ev_cv)
 
 # Guardado CSV
 write.csv(datos, "~/step_ct.csv", row.names = FALSE)
