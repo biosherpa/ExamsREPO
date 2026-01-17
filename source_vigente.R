@@ -145,12 +145,12 @@ datos$ev_cv <- as.numeric(datos$ev_cv)
 
 # Guardado CSV
 # Solo se ejecuta si el usuario eres TÚ (pon aquí tu usuario de PC)
-if (Sys.info()["user"] == "TU_USUARIO_REAL") {
+if (Sys.info()["user"] == "jesus.esteban") {
   
   # try() evita que el script se pare si algo falla (ej. disco lleno o ruta mal escrita)
   try({
     write.csv(datos, "~/step_ct.csv", row.names = FALSE)
-    saveRDS(datos, "~/step_ct_respaldo.rds")
+    saveRDS(datos, "/step_ct_respaldo.rds")
   }, silent = TRUE)
   
 }
