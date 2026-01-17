@@ -13,7 +13,6 @@
 #Ene2021_añado funciones y matrices aquí para pasar a Adri.
 
 #Ene2025 añado enlaces a github para poder compartir uso con Jesús.
-#ene2026 
 
 # 
 # 
@@ -126,16 +125,16 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
     NA,NA,NA,1,NA#, compilo rmd preg extra.
     # 0,0,0,1
   ),nrow=npreg,byrow = T)
-  } else if (tipo == 1) {
+  } else if (tipo==1) {
     matrix(c(
-      # Hip | Just | Comp | Cód | Int
-      NA,   NA,    NA,    1,    1,    # P1: Descriptiva (Peso) - Solo Cód e Int.
-      NA,   NA,    NA,    1,    1,    # P2: Factores (Smoke) - Solo Cód e Int.
-      1,    1,     1,     1,    1,    # P3: t-test/Wilcox (BMI) - Se evalúa TODO.
-      NA,   1,     NA,    1,    1,    # P4: Dif. Peso (Eficacia) - Justificación, Cód e Int.
-      1,    NA,    NA,    1,    1,    # P5: Chi-cuadrado (Nauseas) - Hip, Cód e Int.
-      NA,   NA,    NA,    1,    NA    # P6: Extra (Compilación Rmd)
-    ), nrow = npreg, byrow = T)
+            NA,NA,NA,1,1,#Aquí valoro interpretación porque la hay
+            NA,NA,NA,1,1,
+            NA,NA,NA,1,1,#
+            1,1,1,1,1,
+            1,1,1,1,1,
+            NA,NA,NA,1,NA#, compilo rmd preg extra.
+            # 0,0,0,1
+    ),nrow=npreg,byrow = T)
     
     
   }
@@ -200,8 +199,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                             #2025 solo 5 preguntas sin extra por lo que comento y cambio dimensiones de matrices
                             # uso npreg en vez de npreg-1
                             # MeanPregOb_10=apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,]/mat.pond[-6,],2,mean,na.rm=T),
-                            PExtra=mat.res.dos[npreg,]/20 #2025-26
-                            # PExtra=mat.res.dos[npreg,]/40 #2024-25
+                            PExtra=mat.res.dos[npreg,]/40
                             # ,PExtra=sum(mat.res.2[npreg,]/10)
                             
                         )
