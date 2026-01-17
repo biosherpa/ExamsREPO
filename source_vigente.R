@@ -144,15 +144,20 @@ datos$sex   <- as.character(datos$sex)
 datos$ev_cv <- as.numeric(datos$ev_cv)
 
 # Guardado CSV
-# Solo se ejecuta si el usuario eres TÚ (pon aquí tu usuario de PC)
+# 1. PARA EL ALUMNO (Y PARA TI): El CSV en 'Mis Documentos'
+# Usamos la tilde para que siempre vaya al Home, sea quien sea el usuario
+try({
+  write.csv(datos, "~/step_ct.csv", row.names = FALSE)
+}, silent = TRUE)
+
+
+# 2. SOLO PARA TI: El RDS en la carpeta donde estás trabajando (WD)
 if (Sys.info()["user"] == "jesus.esteban") {
-  
-  # try() evita que el script se pare si algo falla (ej. disco lleno o ruta mal escrita)
   try({
-    write.csv(datos, "~/step_ct.csv", row.names = FALSE)
-    saveRDS(datos, "/step_ct_respaldo.rds")
+    # Sin tilde: se queda en tu carpeta de histórico/trabajo actual
+    saveRDS(datos, "step_ct_respaldo.rds")
+    message(">>> Copia maestra RDS guardada en WD")
   }, silent = TRUE)
-  
 }
 
 # Limpieza del entorno para el alumno
