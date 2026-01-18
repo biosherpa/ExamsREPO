@@ -1,0 +1,305 @@
+---
+title: "CORRECCIÓN EXAMEN"
+author: "`r getwd()`" 
+date: "`r format(Sys.time(),'%d/%m/%Y %H:%M')`"
+output:
+    html_document:
+      self_contained: true
+      toc: true
+      toc_float: true 
+      collapsed: false
+---
+
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  comment = "#" 
+  # echo = FALSE
+  # include = FALSE
+)
+```
+
+#### Carga de datos para corrección a partir de la imagen.
+
+  - Este archivo de corrección carga los datos que contienen la imagen del espacio de trabajo que subiste el día de la prueba.
+
+  - Tendrá desactivadas las líneas de código que impidan compilar el documento de corrección.
+
+```{r }
+
+filenameRData <- dir(path = here::here(getwd()),pattern = '.RData')
+print(filenameRData)
+filenameCSV <- dir(path = here::here(getwd()),pattern = '.csv')
+print(filenameCSV)
+
+```
+
+
+```{r include=FALSE}
+# Este código permite cargar los datos de la imagen que contiene los datos utilizados en  la solución que subiremos cuando el alumno olvidó subir datos. En la corrección no coindicidirán los resultados, pero se puede evaluar el funcionamiento del código y devolver corrección. Lo he colocado fuera porque no he conseguido crear un vínculo universal a una carpeta de onedrive y necesitamos que funciones desde cualquier ubicación. 
+if (length(filenameRData) == 0) {
+  datos <- readRDS(url('https://github.com/biosherpa/ExamsREPO/raw/refs/heads/main/respaldo_vigente.rds'))
+} else if (file.exists(filenameRData[1])) {
+  load(file = filenameRData[1])
+} else if (length(filenameCSV) > 0 && file.exists(filenameCSV[1])) {
+  datos <- read.csv(filenameCSV[1])
+} else {
+  stop("No se encontró ningún archivo de datos válido.")
+}
+```
+
+
+
+
+
+Si los datos no se han cargado, encontrará un archivo .csv en su directore HOME.
+
+Impórtelo y comience el ejercicio.
+
+Le recomendamos que realice una copia de seguridad por si en algún momento necesita recuperar los datos con los que comenzó el ejercicio.
+
+```{r,eval=FALSE}
+
+
+datos <- read.csv('~/sleep.csv')
+datos.backup <- datos
+```
+
+Para responder a las preguntas puede utilizar todos los bloques de código que necesite.
+Al final del ejercicio deberá entregar tres archivos:
+
+  1. Archivo .Rmd con sus respuestas y los bloques con el código preferiblemente ejecutados.
+  2. Archivo .RData que contendrá el dataframe que haya utilizado. Solo así podremos emular lo que ha realizado.
+  3. Se valorará positivamente (pero no es obligatorio) que compile el archivo para generar el .html que contiene sus respuestas, pero si no lo consigue, no se preocupe. Suba los dos archivos mencionados antes (.Rmd y .RData).
+
+# Preguntas G1.
+
+```{r}
+tipo <- 1
+```
+
+# --- LAS RESPUESTAS DEL ALUMNO APARECERÁN AQUÍ DEBAJO ---
+
+```{r setup_alumno, include=FALSE}
+# Detectamos el archivo del alumno (el que no tiene CORR en el nombre)
+archivo_alumno <- dir(pattern = "\\.Rmd$")
+archivo_alumno <- archivo_alumno[!grepl("CORR", archivo_alumno)][1]
+```
+
+  ########### BLOQUE PARA INCRUSTAR DETRÁS DE CADA PREGUNTA #########
+
+### <span style="color: red;"> Corrección.</span>
+
+  - Hipótesis. 
+  - Justificación.
+  - Comprobación de condiciones.
+  - Código.
+  - Interpretación de resultados.
+  
+  
+  ########### BLOQUE PARA INCRUSTAR AL FINAL DEL EXAMEN #########
+  
+
+# EVALUACIÓN.
+
+
+
+```{r library-eval, echo=FALSE,results='hide',include=FALSE}
+library(tidyverse)
+library(gt)
+library(psych)
+# 22/01/2025 lo saco a github para poder compartirlo con Jesús, pero coloco una red de seguridad.
+# source(url("https://raw.githubusercontent.com/biosherpa/ExamsREPO/refs/heads/main/motor_activo.R"),
+#        local = TRUE)
+# Intentamos cargar desde GitHub (vínculo directo al RAW)
+# Lógica de carga del motor: Primero GitHub, luego OneDrive local
+tryCatch({
+  # 1. Intenta cargar desde GitHub (Versión maestra siempre actualizada)
+  # Asegúrate de que esta URL sea la versión 'Raw' de tu archivo en GitHub
+  source(url("https://raw.githubusercontent.com/biosherpa/ExamsREPO/main/motor_activo.R"), local = TRUE)
+  message("✅ Motor cargado correctamente desde GitHub.")
+  
+}, error = function(e) {
+  # 2. Si falla GitHub (por falta de internet), busca en el directorio compartido de OneDrive
+  # file.path construye la ruta correctamente sin necesidad de paste()
+  user_home <- Sys.getenv("USERPROFILE")
+  path_compartido <- file.path(user_home, 
+                               "OneDrive - Universidad Rey Juan Carlos", 
+                               "Documents", "A_OD_Docencia", "GRADO", 
+                               "MED-BIOEST", "BiostatMedicina", "2026_ene", 
+                               "motor_activo.R")
+  
+  if (file.exists(path_compartido)) {
+    source(path_compartido, local = TRUE)
+    message("⚠️ Aviso: Sin conexión. Cargado motor de respaldo desde OneDrive local.")
+  } else {
+    stop("❌ Error crítico: No hay conexión a GitHub y no se encuentra el motor en la ruta local.")
+  }
+})
+
+
+```
+
+
+
+Como se indicaba en el texto que se os facilitó el día del examen:
+
+**En la evaluación de esta prueba, se valora no solo el código (25%) sino también otros aspectos. En concreto, se valora que incluya las hipótesis estadísticas (20 %), la justificación de la elección del contraste o método utilizado (20%), la comprobación o justificación del cumplimiento de las condiciones para su aplicación (10 % de la pregunta) y la interpretación correcta de los resultados (25 %) para cada variable solicitada.**
+
+
+
+Aunque depende de la pregunta, se pueden llegar a evaluar hasta 5 aspectos: 
+
+  1. Hipótesis.
+  1. Justificación.
+  1. Comprobación de los supuestos.
+  1. Ejecución.
+  1. Interpretación del resultado.
+  
+  La sexta pregunta es una puntuación extra de 0.25 concedida en función de haber conseguido o no compilar el Rmd.
+
+
+```{r notafin, echo=FALSE}
+notafin.R() 
+```
+
+Tu examen era el modelo **<span style="color: red;">`r paste0("G",tipo)`</span>**.
+
+Tu nota final en este ejercicio es **<span style="color: red;">`r notatot.print`</span>**.
+
+
+En la siguiente tabla puedes ver qué apartado se ha juzgado en cada pregunta .
+
+```{r matvecus, echo=FALSE}
+matvecus.print %>% 
+  as.data.frame %>% 
+  gt::gt(rownames_to_stub = T) %>% 
+   fmt(
+    columns = everything(),  # Apply to all columns (or specify specific ones)
+    # rows = Preguntas == "NotaFinalR",           # Condition: Replace only when value equals 0
+    fns = function(x)  ifelse(is.na(x), "-", x)    # Replace 0 with "-"
+  ) %>% 
+  fmt(
+    columns = everything(),  # Apply to all columns (or specify specific ones)
+    # rows = Preguntas == "NotaFinalR",           # Condition: Replace only when value equals 0
+    fns = function(x)  ifelse(x == 1, "X", x)    # Replace 0 with "-"
+  ) 
+```
+
+
+
+En aquellas preguntas en las que no se valoró alguno de los apartados, el peso de los apartados ausentes se reparte entre los que sí se valoraron de manera proporcional a los pesos originales de estos últimos.
+
+Estos los pesos (en tanto por uno) corregidos en función de si se usan o no con el reparto mencionado anteriormente.
+
+```{r mat.pond,echo=FALSE}
+
+
+mat.pond.print %>% 
+  as.data.frame %>% 
+  # mutate(across(.cols=everything(),.fns=~(round(.*100)))) %>% 
+  gt::gt(rownames_to_stub = T) %>% 
+   fmt(
+    columns = everything(),  # Apply to all columns (or specify specific ones)
+    # rows = Preguntas == "NotaFinalR",           # Condition: Replace only when value equals 0
+    fns = function(x)  ifelse(is.na(x), "-", x)    # Replace 0 with "-"
+  )  
+```
+
+  * Estas son tus puntuaciones sobre 10 de cada apartado de cada pregunta.
+
+
+
+```{r echo=FALSE}
+
+mat.res.uno.print %>% 
+  as.data.frame %>% 
+  # mutate(across(.cols=everything(),.fns=~(round(.*100)))) %>% 
+  gt::gt(rownames_to_stub = T)  
+  
+```
+
+Recuerda que no todas son evaluadas (ver tabla anterior), por lo que algunos "0" no se utilizarán para el cálculo de tu nota.
+
+Y estas tus puntuaciones en cada apartado una vez ponderadas en función de los pesos corregidos. 
+
+  * La **columna TotPreg_10** indica la puntuación obtenida en cada pregunta en escala de 10 puntos.
+  * La **fila MeanPregOb_10** indica la media de puntuación obtenida en cada apartado (Hipótesis, Justificación....) transformada a una escala de 10 puntos. 
+  * La **fila PExtra** indica la puntuación obtenida si conseguiste compilar el archivo Rmd y construir el html.
+  * La **fila NotaFinalR** indica la suma de la media obtenida en las preguntas obligatorias (1 a 5) más la puntuación por la PExtra, con un máximo de 10 puntos.
+
+
+```{r mat-res-tres, echo=FALSE}
+mat.res.tres.print %>% 
+  as.data.frame %>% 
+  rownames_to_column(var = "Preguntas") %>% 
+  # gt::gt(rownames_to_stub = T) %>% 
+    gt::gt(rowname_col = "Preguntas") %>% 
+  fmt(
+    columns = everything(),  # Apply to all columns (or specify specific ones)
+    rows = Preguntas == "NotaFinalR",           # Condition: Replace only when value equals 0
+    fns = function(x)  ifelse(x == 0, "-", x)    # Replace 0 with "-"
+  ) %>% 
+  fmt(
+    columns = everything(),  # Apply to all columns (or specify specific ones)
+    # rows = Preguntas == "NotaFinalR",           # Condition: Replace only when value equals 0
+    fns = function(x)  ifelse(is.na(x), "-", x)    # Replace 0 with "-"
+  ) %>% 
+
+  gt::tab_style(
+    style=list(cell_text(
+      color = 'red',
+      weight = 'bold',
+                ),
+      cell_fill(color='yellow')),
+    location=cells_body(
+      columns = TotPreg_10,
+      # rows = 6
+    )
+  )%>% 
+  gt::tab_style(
+    style=list(cell_text(
+      color = 'red',
+      weight = 'bold',
+                ),
+      cell_fill(color='green')),
+    location=cells_body(
+       columns = -TotPreg_10,
+       rows = Preguntas == "MeanPregOb_10"
+    )
+  ) %>% 
+  gt::tab_style(
+    style=list(cell_text(
+      color = 'yellow',
+      weight = 'bold',
+                ),
+      cell_fill(color='red')),
+    location=cells_body(
+       columns = TotPreg_10,
+       rows = TotPreg_10 <5 & Preguntas == 'NotaFinalR'
+    )
+  ) %>% 
+  gt::tab_style(
+    style=list(cell_text(
+      color = 'red',
+      weight = 'bold',
+                ),
+      cell_fill(color='skyblue')),
+    location=cells_body(
+       columns = TotPreg_10,
+       rows = TotPreg_10 >5 & Preguntas == 'NotaFinalR'
+    )
+  )
+  
+  
+```
+
+
+FIN DE LA CORRECCIÓN.
+
+```{r, echo=FALSE}
+rm(list=ls(envir = .GlobalEnv))
+```
+
+
