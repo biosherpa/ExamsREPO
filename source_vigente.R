@@ -10,10 +10,20 @@ multinom_sample <- function(n, prob) {
 
 # 1. IDENTIFICACIÓN DEL ALUMNO (Semilla única)
 # -----------------------------------------------------------------------
-usuario <- Sys.info()[["user"]]
-letras_raw <- as.integer(charToRaw(usuario))
-posiciones <- 1:length(letras_raw)
-semilla_robusta <- sum(letras_raw * posiciones)
+# Intentamos obtener el usuario de Windows
+usuario <- try(Sys.info()[["user"]], silent = TRUE)
+
+if (inherits(usuario, "try-error") || is.null(usuario) || usuario == "") {
+  # SI FALLA: Usamos el tiempo actual (segundos desde 1970) como semilla
+  # Esto garantiza que cada examen sea diferente incluso si falla el nombre
+  semilla_robusta <- as.integer(Sys.time()) 
+} else {
+  # SI FUNCIONA: Usamos tu lógica de posición de letras para consistencia
+  letras_raw <- as.integer(charToRaw(usuario))
+  posiciones <- 1:length(letras_raw)
+  semilla_robusta <- sum(letras_raw * posiciones)
+}
+
 
 set.seed(semilla_robusta)
 n_size <- sample(1500:2200, 1)
