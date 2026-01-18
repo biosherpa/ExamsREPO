@@ -110,8 +110,8 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
     matrix(c(
     NA,NA,NA,1,1,
     NA,NA,NA,1,1,
-    1,1,1,1,1,
-    1,1,1,1,1,
+    1,1,NA,1,1,
+    1,NA,1,NA,1,
     1,1,1,1,1,
     NA,NA,NA,1,NA#, compilo rmd preg extra.
     # 0,0,0,1

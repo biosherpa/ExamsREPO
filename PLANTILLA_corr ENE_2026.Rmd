@@ -10,11 +10,23 @@ output:
       collapsed: false
 ---
 
+########### BLOQUE PARA INCRUSTAR DESPUÉS DE PREGUNTAS G1/G2/G3 ########G#
+
+# CORRECCIÓN 
+## Carga de datos para corrección a partir de la imagen.
+
+  - Este archivo de corrección carga los datos que contienen la imagen del espacio de trabajo que subiste el día de la prueba.
+
+  - Tendrá desactivadas las líneas de código que impidan compilar el documento de corrección.
 
 
-```{r setup_corr_data, include=FALSE}
-knitr::opts_chunk$set(comment = "#")
-      
+
+
+```{r setup_correccion, include=FALSE}
+# NO MODIFICAR ESTA VARIABLE
+ tipo <- 2
+
+
 # 1. CONFIGURACIÓN DE RMARKDOWN
 knitr::opts_chunk$set(
   comment = "#",
@@ -31,11 +43,15 @@ knitr::opts_chunk$set(
     user_home  <- Sys.getenv("USERPROFILE")
     path_local <- file.path(user_home, "OneDrive - Universidad Rey Juan Carlos", "BIOSTATMED_2026")
     
-    if (length(filenameRData) > 0) {
-      load(file = filenameRData[1])
-    } else if (length(filenameCSV) > 0) {
-      datos <- read.csv(filenameCSV[1])
-    } else {
+   if (length(filenameRData) > 0) {
+        # SOLUCIÓN AL ERROR: Renombramos el archivo del alumno para quitar paréntesis/espacios
+        archivo_original <- filenameRData[1]
+        archivo_seguro   <- "datos_alumno_temp.RData"
+        file.rename(archivo_original, archivo_seguro)
+        load(file = archivo_seguro)
+      } else if (length(filenameCSV) > 0) {
+        datos <- read.csv(filenameCSV[1])
+      } else {
       # Si no hay archivos del alumno, intentamos descargar de GitHub
       # Usamos tryCatch para que si no hay internet, pase al respaldo de OneDrive
       tryCatch({
@@ -72,17 +88,11 @@ knitr::opts_chunk$set(
   library(psych)
 ```
 
-#### Carga de datos para corrección a partir de la imagen.
-
-  - Este archivo de corrección carga los datos que contienen la imagen del espacio de trabajo que subiste el día de la prueba.
-
-  - Tendrá desactivadas las líneas de código que impidan compilar el documento de corrección.
-
-
 
 
 
   ########### BLOQUE PARA INCRUSTAR DETRÁS DE CADA PREGUNTA #########
+  # más rápido configurar un snippet ##
 
 ### <span style="color: red;"> Corrección.</span>
 
@@ -95,6 +105,7 @@ knitr::opts_chunk$set(
   
   ########### BLOQUE PARA INCRUSTAR AL FINAL DEL EXAMEN #########
   
+
 
 # EVALUACIÓN.
 
@@ -110,26 +121,29 @@ library(psych)
 # Intentamos cargar desde GitHub (vínculo directo al RAW)
 # Lógica de carga del motor: Primero GitHub, luego OneDrive local
 tryCatch({
-  # 1. Intenta cargar desde GitHub (Versión maestra siempre actualizada)
-  # Asegúrate de que esta URL sea la versión 'Raw' de tu archivo en GitHub
+  # 1. Prioridad absoluta: GitHub
   source(url("https://raw.githubusercontent.com/biosherpa/ExamsREPO/main/motor_activo.R"), local = TRUE)
-  message("✅ Motor cargado correctamente desde GitHub.")
-  
+  message("✅ Motor cargado desde GitHub.")
+
 }, error = function(e) {
-  # 2. Si falla GitHub (por falta de internet), busca en el directorio compartido de OneDrive
-  # file.path construye la ruta correctamente sin necesidad de paste()
+  # 2. Respaldo: Buscar en OneDrive localmente
   user_home <- Sys.getenv("USERPROFILE")
-  path_compartido <- file.path(user_home, 
-                               "OneDrive - Universidad Rey Juan Carlos", 
-                               "Documents", "A_OD_Docencia", "GRADO", 
-                               "MED-BIOEST", "BiostatMedicina", "2026_ene", 
-                               "motor_activo.R")
-  
-  if (file.exists(path_compartido)) {
-    source(path_compartido, local = TRUE)
-    message("⚠️ Aviso: Sin conexión. Cargado motor de respaldo desde OneDrive local.")
+  base_od   <- file.path(user_home, "OneDrive - Universidad Rey Juan Carlos")
+
+  # Definimos las dos realidades posibles:
+  path_invitado <- file.path(base_od, "2026_ene", "motor_activo.R")
+  path_dueno    <- file.path(base_od, "Documents", "A_OD_Docencia", "GRADO", 
+                           "MED-BIOEST", "BiostatMedicina", "2026_ene", "motor_activo.R")
+
+  # Lógica de selección:
+  if (file.exists(path_invitado)) {
+    source(path_invitado, local = TRUE)
+    message("⚠️ Cargado desde OneDrive (Ruta Invitado).")
+  } else if (file.exists(path_dueno)) {
+    source(path_dueno, local = TRUE)
+    message("⚠️ Cargado desde OneDrive (Ruta Dueño).")
   } else {
-    stop("❌ Error crítico: No hay conexión a GitHub y no se encuentra el motor en la ruta local.")
+    stop("❌ ERROR CRÍTICO: El motor no está en GitHub ni en ninguna ruta de OneDrive.")
   }
 })
 
