@@ -256,5 +256,5 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
 }
 
 
- notafin.R()
+ # notafin.R()
  # rm(list=setdiff(ls(),c("notafin.R","pond.cor",'datos')))
