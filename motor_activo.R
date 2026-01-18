@@ -104,9 +104,10 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   namecrit<-c('Hipótesis','Justificación','Comprobacion','Código','Interpretación') #Elimino los % de los títulos porque cuando cambian confunden.
   #En enero 2024 introduje tres modelos, uno por cada grupo de prácticas y por tanto el vector de uso cambia de nos a
   # otros. Así que he de cargar un vector de uso diferente en función del grupo de prácticas.
-  
+  #2026 - de momento misma matriz para los tres grupos. 
    # tipo <- 3
-  matvecus<-if(tipo==3){ matrix(c(
+  matvecus<-if(tipo==3){ 
+    matrix(c(
     NA,NA,NA,1,1,
     NA,NA,NA,1,1,
     1,1,1,1,1,
@@ -117,24 +118,23 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
 ),nrow=npreg,byrow = T)
 
 
-  } else if (tipo==2) { matrix(c(
-    NA,NA,NA,1,1,
-    NA,NA,NA,1,1,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    1,1,1,1,1,
-    NA,NA,NA,1,NA#, compilo rmd preg extra.
-    # 0,0,0,1
+  } else if (tipo==2) { 
+    matrix(c(
+      NA,NA,NA,1,1,
+      NA,NA,NA,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      NA,NA,NA,1,NA#, compilo rmd preg extra.    
   ),nrow=npreg,byrow = T)
   } else if (tipo == 1) {
     matrix(c(
-      # Hip | Just | Comp | Cód | Int
-      NA,   NA,    NA,    1,    1,    # P1: Descriptiva (Peso) - Solo Cód e Int.
-      NA,   NA,    NA,    1,    1,    # P2: Factores (Smoke) - Solo Cód e Int.
-      1,    1,     1,     1,    1,    # P3: t-test/Wilcox (BMI) - Se evalúa TODO.
-      NA,   1,     NA,    1,    1,    # P4: Dif. Peso (Eficacia) - Justificación, Cód e Int.
-      1,    NA,    NA,    1,    1,    # P5: Chi-cuadrado (Nauseas) - Hip, Cód e Int.
-      NA,   NA,    NA,    1,    NA    # P6: Extra (Compilación Rmd)
+      NA,NA,NA,1,1,
+      NA,NA,NA,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      NA,NA,NA,1,NA#, compilo rmd preg extra.
     ), nrow = npreg, byrow = T)
     
     
