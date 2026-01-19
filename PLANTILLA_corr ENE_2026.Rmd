@@ -12,22 +12,25 @@ output:
 
 ########### BLOQUE PARA INCRUSTAR DESPUÉS DE PREGUNTAS G1/G2/G3 ########G#
 
-  PROTOCOLO DE CORRECCIÓN 
+# PROTOCOLO DE CORRECCIÓN 
   
   He tratado de modificar el código para que sea más automático y sencillo para ti corregir.
   En realidad verás mucho más código porque usa condicionales por si falla algún recurso, por ejemplo github, para que en su lugar cargue el mismo archivo de la carpeta compartida. Espero que para ti sea transparente, pero haremos una prueba el lunes.
 
   Sigue estos pasos para integrar el motor de corrección en el examen del alumno:
   
-  1. Inserción del Motor y Datos
+##  1. Inserción del Motor y Datos
   Nada más abrir el examen del alumno, busca la línea que dice "Pregunta G1" (o G2/G3) e inserta justo debajo el bloque de código que hay justo debajo del encabezado #CORRECCIÓN. Este chunk carga el motor desde GitHub (o OneDrive si falla internet) y prepara los datos. Al inicio del chunk verás la variable tipo que deberás cambiar acorde al grupo del alumno. Dado que este año los tres grpos tienen la misma matriz de corrección si no lo haces no pasa nada salvo que el alumno pregunte porque no coincida con su grupo.
   
-  2. Configuración del Snippet de Calificación
+## 2. Configuración del Snippet de Calificación
+  
   Pueds copiar y pegar el fragmento que ya usábamos para los comentarios sobre los apartado.
   Pero he descubierto que con un  sencillo snippet, la tarea se facilita mucho.
   Para no escribir código repetitivo, configura este snippet en tu RStudio (**Tools > Global Options > Code > Edit Snippets**). Busca la sección **Markdown** y pega esto al final:
   
-  snippet cal
+  Esto es lo que incrusta el snippet
+  
+  
 	### <span style="color: red;"> Corrección.</span>
 	
 	- Hipótesis: 
@@ -41,18 +44,25 @@ output:
 	```{r, echo=FALSE}
 	cal${1:1} <- c(10, 10, 10, 10, 10)
 	```
-  Uso: Escribe cal + Mayús + Tab debajo de cada respuesta del alumno e insertará el texto (que luego puedes modificar) y un chunk para insertar el vector de calificación.
+	
+	
+	  Uso: Escribe cal y luego pulsa Mayús + Tab 
+	  Donde estés escribiendo, insertará el texto (que luego puedes modificar) y un chunk para insertar el vector de calificación.
+	  He pensado qeu, dado que es una tarea que se repite muchas veces, este automatismos te ahorrará tiempo.
   
-  3. Cierre y Evaluación Final
+##  3. Cierre y Evaluación Final
   
   Al final de todo el archivo .Rmd del alumno, pega el bloque debajo del epígrafe #EVALUACIÓN para generar la tabla de notas y la calificación final:
+  
   No olvides cambiar el nombre al archivo de corrección para no perder el del alumno, aunque siempre se puede volver a descarar del aula virtual.
   
-  4. Compilar.
+##  4. Compilar.
 
+########### Lo que hay que copiar y pegar está a partir de este punto ##############
 
 # CORRECCIÓN 
-## Carga de datos para corrección a partir de la imagen.
+
+   Carga de datos para corrección a partir de la imagen.
 
   - Este archivo de corrección carga los datos que contienen la imagen del espacio de trabajo que subiste el día de la prueba.
 
