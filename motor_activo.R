@@ -109,10 +109,10 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   matvecus<-if(tipo==3){ 
     matrix(c(
       NA,NA,NA,1,1,
-      NA,NA,NA,1,1,
+      1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      1,1,1,1,1,
+      NA,NA,NA,1,1,
       NA,NA,NA,1,NA#, compilo rmd preg extra.    
     # 0,0,0,1
 ),nrow=npreg,byrow = T)
