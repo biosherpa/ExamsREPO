@@ -105,6 +105,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   #En enero 2024 introduje tres modelos, uno por cada grupo de prácticas y por tanto el vector de uso cambia de nos a
   # otros. Así que he de cargar un vector de uso diferente en función del grupo de prácticas.
   #2026 - de momento misma matriz para los tres grupos. 
+  #2026 - PARA EVITAR ERRORES, CONFIGURO LOS TRES TIPOS IGUAL PORQUE HAY UN SOLO MODELO EN JUNIO.
    # tipo <- 3
   matvecus<-if(tipo==3){ 
     matrix(c(
@@ -121,20 +122,20 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   } else if (tipo==2) { 
     matrix(c(
       NA,NA,NA,1,1,
-      NA,NA,NA,1,1,
+      1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      1,1,1,1,1,
+      NA,NA,NA,1,1,
       NA,NA,NA,1,NA#, compilo rmd preg extra.    
   ),nrow=npreg,byrow = T)
   } else if (tipo == 1) {
     matrix(c(
       NA,NA,NA,1,1,
-      NA,NA,NA,1,1,
+      1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      1,1,1,1,1,
-      NA,NA,NA,1,NA#, compilo rmd preg extra.
+      NA,NA,NA,1,1,
+      NA,NA,NA,1,NA#, compilo rmd preg extra.  
     ), nrow = npreg, byrow = T)
     
     
