@@ -83,12 +83,12 @@ generate_clinical_data <- function(n) {
     alcohol = alcohol,  # Nueva variable
     eva_basal = round(eva_basal, 1),
     eva_6wk = round(eva_6wk, 1),
-    eva_12wk = round(eva_12wk, 1),
-    dolor_eva_final = round(dolor_eva_final, 1),
-    dolor_eva_final_interaccion = round(dolor_eva_final_interaccion, 1)  # Para demostrar interacción
+    eva_12wk = round(eva_12wk, 1)#,
+    # dolor_eva_final = round(dolor_eva_final, 1),
+    # dolor_eva_final_interaccion = round(dolor_eva_final_interaccion, 1)  # Para demostrar interacción
   )
   
-
+  
   # Redondeo de basales
   is_num <- sapply(df, is.numeric)
   df[is_num] <- round(df[is_num], 2)
@@ -140,13 +140,13 @@ generate_outcomes <- function(data) {
   
   # --- PESO FINAL ---
   cambio_eva <- ifelse(data$treat == "Nuevo", eff_A_t1,
-                     ifelse(data$treat == "Estándar", 0, 0))
+                       ifelse(data$treat == "Estándar", 0, 0))
   data$eva_basal<- data$eva_basal + cambio_eva + 0.08*(data$age-40) + rnorm(n_size, 0, 2)
   
   # --- EVENTO CV (Interacción por edad) ---
   log_or_ae <- ifelse(data$treat == "Nuevo", log(or_ae_A_t1),
                       ifelse(data$treat == "Estándar", log(1), 0)
-                      )
+  )
   
   es_joven <- data$age < 60
   efecto_f <- log_or_ae * ifelse(es_joven, 1, -0.6)
@@ -200,19 +200,20 @@ datos$treat <- as.numeric(as.factor(datos$treat)) - 1
 # Aseguramos que el resto sean caracteres o números, no factores
 datos$smoke <- as.character(datos$smoke)
 datos$sex   <- as.character(datos$sex)
-datos$ae <- as.numeric(datos$ae)
+datos$ae <- as.numeric(datos$ae)-1
 
 # Guardado CSV
 # Solo se ejecuta si el usuario eres TÚ (pon aquí tu usuario de PC)
-if (Sys.info()["user"] == "jesus.esteban") {
-  
-  # try() evita que el script se pare si algo falla (ej. disco lleno o ruta mal escrita)
-  try({
-    write.csv(datos, "~/pain_ct.csv", row.names = FALSE)
-    saveRDS(datos, "~/pain_ct_respaldo.rds")
-  }, silent = TRUE)
-  
-}
+# if (Sys.info()["user"] == "jesus.esteban") {
+
+# try() evita que el script se pare si algo falla (ej. disco lleno o ruta mal escrita)
+#Desactivo la condición para que lo haga siempre.
+try({
+  write.csv(datos, "~/pain_ct.csv", row.names = FALSE)
+  saveRDS(datos, "~/pain_ct_respaldo.rds")
+}, silent = TRUE)
+
+# }
 
 library(labelled)
 # Añadimos etiquetas descriptivas (opcional, por si tu df ya las tiene)
@@ -229,7 +230,7 @@ var_label(datos) <- list(
   eva_12wk                = "Escala Visual Analógica (EVA) a las 12 semanas",
   dolor_eva_final         = "Dolor EVA final (Modelo simple)",
   dolor_eva_final_interaccion = "Dolor EVA final (Modelo con interacción)",
-  ae                      = "Presencia de Evento Adverso "
+  ae                      = "Efecto adverso - Naúseas"
 )
 
 # Limpieza del entorno para el alumno
