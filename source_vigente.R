@@ -214,6 +214,24 @@ if (Sys.info()["user"] == "jesus.esteban") {
   
 }
 
+library(labelled)
+# Añadimos etiquetas descriptivas (opcional, por si tu df ya las tiene)
+var_label(datos) <- list(
+  id                      = "ID",
+  gravedad                = "Índice de gravedad basal",
+  treat                   = "Grupo de tratamiento asignado",
+  age                     = "Edad al ingreso",
+  sex                     = "Sexo del paciente",
+  smoke                   = "Hábito tabáquico",
+  alcohol                 = "Consumo de alcohol",
+  eva_basal               = "Escala Visual Analógica (EVA) basal",
+  eva_6wk                 = "Escala Visual Analógica (EVA) a las 6 semanas",
+  eva_12wk                = "Escala Visual Analógica (EVA) a las 12 semanas",
+  dolor_eva_final         = "Dolor EVA final (Modelo simple)",
+  dolor_eva_final_interaccion = "Dolor EVA final (Modelo con interacción)",
+  ae                      = "Presencia de Evento Adverso "
+)
+
 # Limpieza del entorno para el alumno
 rm(list=c(ls(pattern="generate"), 'datos_temp', 'n', 'semilla_robusta', 
           'letras_raw', 'posiciones', 'usuario', 'multinom_sample'))
