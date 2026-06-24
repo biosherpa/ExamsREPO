@@ -110,11 +110,11 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   matvecus<-if(tipo==3){ 
     matrix(c(
       NA,NA,NA,1,1,
+      NA,NA,NA,1,NA,
       1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      NA,NA,NA,1,1,
-      NA,NA,NA,1,NA#, compilo rmd preg extra.    
+      NA,NA,NA,1,NA#, compilo rmd preg extra.  
     # 0,0,0,1
 ),nrow=npreg,byrow = T)
 
@@ -122,19 +122,19 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
   } else if (tipo==2) { 
     matrix(c(
       NA,NA,NA,1,1,
+      NA,NA,NA,1,NA,
       1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      NA,NA,NA,1,1,
       NA,NA,NA,1,NA#, compilo rmd preg extra.    
   ),nrow=npreg,byrow = T)
   } else if (tipo == 1) {
     matrix(c(
       NA,NA,NA,1,1,
+      NA,NA,NA,1,NA,
       1,1,1,1,1,
       NA,NA,NA,1,1,
       1,1,1,1,1,
-      NA,NA,NA,1,1,
       NA,NA,NA,1,NA#, compilo rmd preg extra.  
     ), nrow = npreg, byrow = T)
     
@@ -201,7 +201,7 @@ notafin.R<-function(matvecpond,matvecus,matcal,npreg,namecrit){
                             #2025 solo 5 preguntas sin extra por lo que comento y cambio dimensiones de matrices
                             # uso npreg en vez de npreg-1
                             # MeanPregOb_10=apply(mat.res.dos[1:dim(mat.res.dos)[1]-1,]/mat.pond[-6,],2,mean,na.rm=T),
-                            PExtra=mat.res.dos[npreg,]/20 #2025-26
+                            PExtra=mat.res.dos[npreg,]/40 #2025-26
                             # PExtra=mat.res.dos[npreg,]/40 #2024-25
                             # ,PExtra=sum(mat.res.2[npreg,]/10)
                             

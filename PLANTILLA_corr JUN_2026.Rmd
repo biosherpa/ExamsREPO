@@ -181,9 +181,9 @@ tryCatch({
   base_od   <- file.path(user_home, "OneDrive - Universidad Rey Juan Carlos")
 
   # Definimos las dos realidades posibles:
-  path_invitado <- file.path(base_od, "2026_ene", "motor_activo.R")
+  path_invitado <- file.path(base_od, "2026_jun", "motor_activo.R")
   path_dueno    <- file.path(base_od, "Documents", "A_OD_Docencia", "GRADO", 
-                           "MED-BIOEST", "BiostatMedicina", "2026_ene", "motor_activo.R")
+                           "MED-BIOEST", "BiostatMedicina", "2026_jun", "motor_activo.R")
 
   # Lógica de selección:
   if (file.exists(path_invitado)) {
